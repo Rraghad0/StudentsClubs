@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Club>
+
+<div class="row pb-3">
+    @foreach (var club in Model)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow">
+                <div class="card-img-top">
+                    <img src="@(!string.IsNullOrEmpty(club.LogoURL) ? club.LogoURL : "https://placehold.co/500x600.png")" style="height: 400px; object-fit: cover; width: 100%;" alt="@club.ClubName Image" class="rounded-top" />
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-0">@club.ClubName</h5>
+                    <p class="card-text text-muted">@club.ClubType</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a asp-action="Details" asp-route-id="@club.ClubID" class="btn btn-primary w-100 text-uppercase">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        background-color: cornflowerblue;
+        border-color: cornflowerblue;
+        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
+
+    .btn-primary:hover {
+            background-color: cornflowerblue;
+            border-color: cornflowerblue;
+    }
+</style>

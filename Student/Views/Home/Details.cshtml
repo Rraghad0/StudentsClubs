@@ -1,0 +1,110 @@
+﻿@model Club
+@{
+    ViewData["Title"] = "Club Details";
+}
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #eef2f7;
+    }
+
+    .club-details {
+        background-color: #ffffff;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-top: 3rem;
+    }
+
+    .club-header {
+        color: #495057;
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .club-name { 
+        color: cornflowerblue;
+    }
+
+    .club-logo {
+        max-width: 100%;
+        height: auto;
+        border-radius: 1rem;
+    }
+
+    .btn-custom {
+        background-color: cornflowerblue; 
+        color: #ffffff;
+        border: none;
+    }
+
+        .btn-custom:hover {
+            background-color: cornflowerblue; 
+            color: #ffffff;
+        }
+
+    .modal-content {
+        border-radius: 0.5rem;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #dee2e6;
+        background-color: #f8f9fa;
+        color: #495057;
+    }
+
+    .close-button {
+        color: #6c757d;
+    }
+
+    .modal-backdrop.show {
+        opacity: 0.5;
+    }
+
+    .description-text {
+        color: #001327;
+    }
+
+    .overview-text {
+        color: #001327;
+    }
+</style>
+
+<section class="container">
+    <div class="club-details">
+        <div class="club-header text-center">
+            <h1 class="club-name">@Model.ClubName</h1>
+            <p class="lead">@Model.ClubType</p>
+        </div>
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6 text-center">
+                <img class="club-logo" src="@Url.Content(!string.IsNullOrEmpty(Model.LogoURL) ? Model.LogoURL : "https://placehold.co/500x500.png")" alt="Club Logo">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="overview-text">Overview</h2>
+                <p class="description-text">@Model.Description</p>
+                <div class="text-center text-lg-start">
+                    @if (!string.IsNullOrWhiteSpace(Model.WhatsAppGroupLink))
+                    {
+                        <a href="@Model.WhatsAppGroupLink" target="_blank" class="btn btn-custom me-2 mb-2">
+                            Join the Club
+                        </a>
+                    }
+                    <a asp-area="Admin" asp-controller="Membership" asp-action="listClubMembers" asp-route-clubName="@Model.ClubName" class="btn btn-custom me-2 mb-2">
+                        View Club Members
+                    </a>
+                    <a asp-area="Admin" asp-controller="Achievement" asp-action="listClubAchievement" asp-route-clubName="@Model.ClubName" class="btn btn-custom mb-2">
+                        Club Achievements
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
