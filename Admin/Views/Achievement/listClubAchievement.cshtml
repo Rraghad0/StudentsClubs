@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StudentsClubs.Models.Achievements>
+
+@{
+    ViewData["Title"] = $"Achievement of {ViewBag.ClubName}";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center" style="color: #0056b3;">@ViewData["Title"]</h2>
+
+    @if (Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var achievement in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm" style="border-left: 5px solid #0056b3;">
+                        <img src="@achievement.Images" class="card-img-top" alt="Achievement Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: #0056b3;">@achievement.Title</h5>
+                            <p class="card-text" style="color: #6c757d;">@achievement.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center" role="alert" style="background-color: #e9ecef; color: #495057; border-color: #dee2e6;">
+            No achievement found for this club.
+        </div>
+    }
+</div>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+    .alert-warning {
+        background-color: #f8d7da;
+        color: #842029;
+        border-color: #f5c2c7;
+    }
+</style>

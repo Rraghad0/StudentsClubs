@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StudentsClubs.Models.Membership>
+@{
+    ViewData["Title"] = $"Members of {ViewBag.ClubName}";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
+
+    @if (Model.Any())
+    {
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            @foreach (var member in Model)
+            {
+                <div class="card member-card shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">@member.Name</h5>
+                        <p class="card-text">@member.Role</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center" role="alert">
+            No members found for this club.
+        </div>
+    }
+</div>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    .member-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border-color: #bee5eb;
+    }
+</style>

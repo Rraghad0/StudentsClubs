@@ -1,0 +1,106 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <h1 class="card-title text-center mb-4">@ViewData["Title"]</h1>
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                            <label asp-for="Input.Email">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Password" />
+                            <label asp-for="Input.Password">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password" />
+                            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.UserFristName" class="form-control" placeholder="First Name" />
+                            <label asp-for="Input.UserFristName">First Name</label>
+                            <span asp-validation-for="Input.UserFristName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.UserLastName" class="form-control" placeholder="Last Name" />
+                            <label asp-for="Input.UserLastName">Last Name</label>
+                            <span asp-validation-for="Input.UserLastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.StudentID" class="form-control" placeholder="Student ID" />
+                            <label asp-for="Input.StudentID">Student ID</label>
+                            <span asp-validation-for="Input.StudentID" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone Number" />
+                            <label asp-for="Input.PhoneNumber">Phone Number</label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.HobbiesAndInterests" class="form-label">Select Your Interests</label>
+                            <select asp-for="Input.HobbiesAndInterests" asp-items="Model.HobbiesAndInterestsOptions" class="form-select" multiple id="hobbiesAndInterestsSelect">
+                            </select>
+                            <span asp-validation-for="Input.HobbiesAndInterests" class="text-danger"></span>
+                        </div>
+                        <div id="clubName" class="mt-3 mb-4"></div>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-primary btn-lg">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('hobbiesAndInterestsSelect').addEventListener('change', function () {
+            var selectedInterests = Array.from(this.selectedOptions).map(option => option.text);
+            var clubName = document.getElementById('clubName');
+            clubName.innerHTML = '';
+
+            selectedInterests.forEach(function (interest) {
+                switch (interest) {
+                    case 'Sport':
+                        clubName.innerHTML += '<p>Sport Club</p>';
+                        break;
+                    case 'Programming':
+                        clubName.innerHTML += '<p>ACPC Club</p>';
+                        break;
+                    case 'Hobby':
+                        clubName.innerHTML += '<p>Photography Club</p>';
+                        break;
+                    case 'Education':
+                        clubName.innerHTML += '<p>Human Development Club</p>';
+                        break;
+                    case 'Social':
+                        clubName.innerHTML += '<p>Culture and Art Club</p>';
+                        break;
+                    default:
+                        break;
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<StudentsClubs.Models.User> 
+
+<h2>Volunteers</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Phone Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var volunteer in Model)
+        {
+            <tr>
+                <td>@volunteer.Email</td>
+                <td>@volunteer.PhoneNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
